@@ -39,6 +39,26 @@ public class Zones {
         return zone;
     }
     public static long[] routes(Input.Slides s, int[] zoneOf, int zoneCount) {
-        return new long[]{0, 0};
+        // Keep only the cheapest parallel slide between each pair of zones.
+        java.util.List<Map<Integer, Integer>> dag = new java.util.ArrayList<>();
+        for (int z = 0; z < zoneCount; z++) dag.add(new HashMap<>());
+        for (int k = 0; k < s.count(); k++) {
+            int a = zoneOf[s.from()[k]], b = zoneOf[s.to()[k]];
+            if (a != b) dag.get(a).merge(b, s.time()[k], Math::min);
+        }
+        long[] distance = new long[zoneCount]; Arrays.fill(distance, Long.MAX_VALUE);
+        int[] stages = new int[zoneCount]; Arrays.fill(stages, 1);
+        distance[zoneOf[0]] = 0;
+        long longest = 0;
+        for (int a = 0; a < zoneCount; a++) {
+            longest = Math.max(longest, stages[a]);
+            for (Map.Entry<Integer, Integer> edge : dag.get(a).entrySet()) {
+                int b = edge.getKey();
+                stages[b] = Math.max(stages[b], stages[a] + 1);
+                if (distance[a] != Long.MAX_VALUE)
+                    distance[b] = Math.min(distance[b], distance[a] + edge.getValue());
+            }
+        }
+        return new long[]{longest, distance[zoneOf[s.n() - 1]]};
     }
 }
