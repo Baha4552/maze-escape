@@ -1,34 +1,25 @@
-/**
- * Mission 0. Disjoint set union (DSU).
- * Cells are numbered 0 .. n-1. Write the whole class here.
- * Needed: union by size (the smaller tree goes under the larger one) and path compression in find.
- */
+/** Union by size with iterative path compression. */
 public class DisjointSet {
-
+    private final int[] parent, size;
+    private int components;
     public DisjointSet(int n) {
-        // TODO
+        parent = new int[n]; size = new int[n]; components = n;
+        for (int i = 0; i < n; i++) { parent[i] = i; size[i] = 1; }
     }
-
-    /** The root of the set that contains x. */
     public int find(int x) {
-        // TODO
-        return x;
+        int root = x;
+        while (parent[root] != root) root = parent[root];
+        while (parent[x] != x) {
+            int next = parent[x]; parent[x] = root; x = next;
+        }
+        return root;
     }
-
-    /** Joins the sets of a and b. Returns true if they were different sets, false if they were already one set. */
     public boolean union(int a, int b) {
-        // TODO
-        return false;
+        int x = find(a), y = find(b);
+        if (x == y) return false;
+        if (size[x] < size[y]) { int t = x; x = y; y = t; }
+        parent[y] = x; size[x] += size[y]; components--; return true;
     }
-
-    public boolean connected(int a, int b) {
-        // TODO
-        return false;
-    }
-
-    /** Number of sets now. */
-    public int count() {
-        // TODO
-        return 0;
-    }
+    public boolean connected(int a, int b) { return find(a) == find(b); }
+    public int count() { return components; }
 }
