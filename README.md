@@ -104,13 +104,11 @@ n = cells, m = walls or slides. Auxiliary space includes graph structures constr
 - Kruskal and Prim agree on the personal variant (no Main warning).
 - Personal data, PNG, HTML, results and benchmark results are included.
 
-## Submission steps remaining
+## Submission checklist
 
-Fill in name and group. Review and adapt the AI-assisted work and explanations, then create a public GitHub repository and push the included `main` history. Submit that repository URL in Moodle before the deadline; this archive alone is not a Moodle submission.
-
-```sh
-git remote add origin https://github.com/YOUR_USERNAME/maze-escape.git
-git push -u origin main
-```
-
-The git author `Assignment workspace <workspace@local>` identifies commits made in this environment; change it to your own identity for future commits if needed.
+- Student ID, name and group are filled in above.
+- Source code, personal input files, maze visualization and benchmark results are included.
+- The supplied checker passes all three examples and the DSU checks.
+- Before submission, verify that the GitHub repository opens without signing in and that the required mission commits are visible on `main`.
+- Review and adapt the AI-assisted code and explanations, and be prepared to explain every algorithm during the defense.
+- Submit the public GitHub repository URL in Moodle before the deadline.
