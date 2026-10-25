@@ -1,8 +1,8 @@
 # Assignment 3. Maze Escape
 
 Student ID: 253730  
-Name: to be filled by the student  
-Group: to be filled by the student  
+Name: Kaiyrzhan Baktiyar
+Group: SE-2519
 Maze size: 12 x 11 (132 cells, 241 walls)
 
 ## Run
